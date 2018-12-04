@@ -16,7 +16,8 @@ class UserModal extends Component {
     state = {
         modal: false, //if the modal is open or not
         name: '', //a form input needs to have a redux state inside component
-        email: ''
+        email: '',
+        password: ''
     };
 
     toggle = () => {
@@ -27,14 +28,16 @@ class UserModal extends Component {
 
     onChange = (e) => {
     this.setState({[e.target.name]: e.target.value});
-    this.setState({[e.target.email]: e.target.value})
+    this.setState({[e.target.email]: e.target.value});
+    this.setState({[e.target.password]: e.target.value});
     };
 
     onSubmit = e => {
       e.preventDefault();
       const newUser = {
         name: this.state.name,
-        email: this.state.email
+        email: this.state.email,
+        password: this.state.password
       };
       //Add name via addUser action
         this.props.addUser(newUser);
@@ -75,6 +78,14 @@ class UserModal extends Component {
                                     name="email"
                                     id="user"
                                     placeholder="Email"
+                                    onChange={this.onChange}
+                                />
+                                <Label for="password"> Password </Label>
+                                <Input
+                                    type="password"
+                                    name="password"
+                                    id="user"
+                                    placeholder="Password"
                                     onChange={this.onChange}
                                 />
                                 <Button
