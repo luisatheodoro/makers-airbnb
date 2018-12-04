@@ -1,6 +1,7 @@
 var chai = require('chai');
 var chaiHttp = require('chai-http');
 var server = require('../server');
+var bcrypt = require('bcryptjs');
 var should = chai.should();
 
 chai.use(chaiHttp);
@@ -29,13 +30,14 @@ describe('Users', function() {
     .post('/api/users')
     .send({'name': 'chris', 'email': 'chris@gmail.com', 'password' : 'mybadpassword'})
     .end(function(err, res){
-      console.log(res.body);
       res.should.have.status(200);
       res.should.be.json;
       res.body.should.have.property('name');
       res.body.should.have.property('email');
       res.body.should.have.property('_id');
       res.body.should.have.property('password');
+      res.body.name.should.equal('chris');
+      res.body.email.should.equal('chris@gmail.com');
       done();
     });
   });
