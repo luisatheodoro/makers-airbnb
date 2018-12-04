@@ -36,7 +36,6 @@ router.post('/', (req, res) => {
 
 });
 
-
 // @route  DELETE api/users/:id
 // @desc   Delete a user
 // @access Public
