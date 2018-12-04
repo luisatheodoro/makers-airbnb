@@ -29,7 +29,6 @@ describe('Users', function() {
     .post('/api/users')
     .send({'name': 'chris', 'email': 'chris@gmail.com', 'password' : 'mybadpassword'})
     .end(function(err, res){
-      console.log(res.body);
       res.should.have.status(200);
       res.should.be.json;
       res.body.should.have.property('name');

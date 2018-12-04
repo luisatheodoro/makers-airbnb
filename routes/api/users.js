@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const bcrypt = require('bcryptjs');
 
 //User Model
 
@@ -20,14 +21,21 @@ router.get('/', (req, res) => {
 // @access Public
 
 router.post('/', (req, res) => {
-    const newUser = new User({
+    let newUser = new User({
         name: req.body.name,
         email: req.body.email,
         password: req.body.password
     });
 
-    newUser.save().then(user => res.json(user));
+    bcrypt.genSalt(10, function(err, salt) {
+        bcrypt.hash(newUser.password, salt, function(err, hash) {
+          newUser.password = hash;
+          newUser.save().then(user => res.json(user));
+        });
+    });
+
 });
+
 
 // @route  DELETE api/users/:id
 // @desc   Delete a user
