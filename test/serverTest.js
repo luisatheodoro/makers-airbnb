@@ -38,6 +38,15 @@ describe('Users', function() {
       res.body.should.have.property('password');
       res.body.name.should.equal('chris');
       res.body.email.should.equal('chris@gmail.com');
+
+      // check password encryption
+      var salt = bcrypt.genSaltSync(10);
+      var hash = bcrypt.hashSync(res.body.password, salt);
+
+      bcrypt.compare(res.body.password, hash, function(err, res) {
+        res.should.be.true;
+      });
+      // finish test
       done();
     });
   });
