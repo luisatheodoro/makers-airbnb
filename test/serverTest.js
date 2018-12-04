@@ -36,6 +36,8 @@ describe('Users', function() {
       res.body.should.have.property('email');
       res.body.should.have.property('_id');
       res.body.should.have.property('password');
+      res.body.name.should.equal('chris');
+      res.body.email.should.equal('chris@gmail.com');
       done();
     });
   });
