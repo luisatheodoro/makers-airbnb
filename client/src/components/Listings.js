@@ -15,12 +15,12 @@ class Listings extends Component {
     };
 
     render() {
-        const { listings } = this.props.listing;
+        // const { listings } = this.props.listings;
         return(
             <Container>
                 <ListGroup>
                     <TransitionGroup className="listings">
-                        {listings.map(({_id, title, description}) => (
+                        {this.props.listings && this.props.listings.listings && this.props.listings.listings.map(({_id, title, description}) => (
                             <CSSTransition key={_id} timeout={500} classNames="fade">
                                 <ListGroupItem>
                                     <Button className="remove-btn"
@@ -43,11 +43,10 @@ class Listings extends Component {
 //When you get an item from redux it's going to be stores into a props
 Listings.propTypes = {
     getListings: PropTypes.func.isRequired,
-    listing: PropTypes.object.isRequired  //this represent a state which is an object
 };
 
 const mapStateToProps = (state) => ({
-    listing: state.listing
+    listings: state.listings
 });
 
 

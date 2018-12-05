@@ -3,7 +3,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import AppNavbar from './components/appNavBar';
 // import UsersList from './components/UsersList';
-import UserRegistration from './components/UserRegistration';
+// import UserRegistration from './components/UserRegistration';
+import Listings from './components/Listings';
 // import UserModal from './components/UserModal';
 import { Provider } from 'react-redux';
 import store from './store';
@@ -16,8 +17,8 @@ class App extends Component {
               <div className="App">
                   <AppNavbar/>
                   <Container>
-                      <UserRegistration/>
-                      {/*<UsersList/>*/}
+                      {/*<UserRegistration/>*/}
+                      <Listings/>
                       {/*<UserModal/>*/}
                   </Container>
 
