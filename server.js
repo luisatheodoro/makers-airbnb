@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const users = require('./routes/api/users');
+const listings = require('./routes/api/listings');
 const app = express();
 
 //Bodyparser Middleware
@@ -16,6 +17,7 @@ mongoose.connect("mongodb://admin:makers2018@ds113136.mlab.com:13136/makers_bnb"
     .catch(err => console.log(err));
 
 //Use Routes
+app.use('/api/listings', listings);
 app.use('/api/users', users);
 
 const port = process.env.PORT || 5000;
