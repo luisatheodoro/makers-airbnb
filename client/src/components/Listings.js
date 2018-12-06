@@ -15,7 +15,6 @@ class Listings extends Component {
     };
 
     render() {
-        // const { listings } = this.props.listings;
         return(
             <Container>
                 <ListGroup>
@@ -29,7 +28,7 @@ class Listings extends Component {
                                             onClick={this.onDeleteClick.bind(this, _id)}>
                                         &times;
                                     </Button>
-                                    {title} {description}
+                                    {title} || {description}
                                 </ListGroupItem>
 
                             </CSSTransition>
@@ -42,7 +41,8 @@ class Listings extends Component {
 }
 //When you get an item from redux it's going to be stores into a props
 Listings.propTypes = {
-    getListings: PropTypes.func.isRequired,
+    getListings: PropTypes.func.isRequired
+    //listing: PropTypes.object.isRequired  //this represent a state which is an object
 };
 
 const mapStateToProps = (state) => ({

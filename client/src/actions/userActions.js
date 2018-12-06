@@ -13,13 +13,16 @@ export const getUsers = () => dispatch => {
       )
 };
 
-export const addUser = (user) => dispatch => {
+export const addUser = (user, history) => dispatch => {
     axios
         .post('/api/users', user)
         .then(res => dispatch({
             type: ADD_USER,
             payload: res.data
         }))
+        .then(() => {
+          history.push("/listings");
+        })
 };
 
 export const deleteUser = id => dispatch => {

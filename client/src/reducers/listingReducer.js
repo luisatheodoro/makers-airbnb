@@ -1,7 +1,7 @@
 import {GET_LISTINGS, ADD_LISTING, DELETE_LISTING, LISTING_LOADING} from '../actions/types';
 
 const initialState = {
-    users: [],
+    listings: [],
     loading: false
 };
 

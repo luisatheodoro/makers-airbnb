@@ -1,7 +1,7 @@
 import {GET_USERS, ADD_USER, DELETE_USER, USERS_LOADING} from '../actions/types';
 
 const initialState = {
-    users: [],
+    users: null,
     loading: false
 };
 
@@ -21,7 +21,7 @@ module.exports = function (state = initialState, action) {
         case ADD_USER:
             return {
                 ...state,
-                users: [action.payload, ...state.users]
+                users: action.payload
             };
         case USERS_LOADING:
             return {
