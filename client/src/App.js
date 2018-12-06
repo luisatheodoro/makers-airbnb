@@ -10,6 +10,7 @@ import {Container} from 'reactstrap';
 import Router from "react-router/Router";
 import Route from "react-router/Route";
 import createBrowserHistory from "history/createBrowserHistory";
+import Login from './components/Login'
 
 class App extends Component {
   render() {
@@ -21,7 +22,7 @@ class App extends Component {
               <Container>
                 <Route path="/" exact component={UserRegistration}/>
                 <Route path="/listings" component={Listings} />
-                {/*<Route path="/sign-in" component={Listings} />*/}
+                <Route path="/login" component={Login} />
               </Container>
             </div>
           </Router>

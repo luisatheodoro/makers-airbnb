@@ -1,6 +1,7 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const bcrypt = require('bcryptjs');
+const bcrypt = require("bcryptjs");
+const keys = require("../../config/keys");
 
 //User Model
 
@@ -34,7 +35,6 @@ router.post('/', (req, res) => {
         });
     });
 
-
 });
 
 // @route  DELETE api/users/:id
@@ -47,6 +47,30 @@ router.delete('/:id', (req, res) => {
         .catch(err => res.status(404).json({success: false}));
 
 });
+
+// @route POST api/users/login
+// @desc Login user and return JWT token
+// @access Public
+router.post("/login", (req, res) => {
+  var name = req.body.name
+  var email = req.body.email
+  var password = req.body.password
+
+  User.findOne({ name: name, email: email, password: password }, function(err, user) {
+    if(err) {
+      console.log(err);
+      return res.status(500).send();
+    }
+
+    if(!user) {
+      return res.status(404).send();
+    }
+
+    return res.status(200).send();
+  })
+
+});
+
 
 
 module.exports = router;

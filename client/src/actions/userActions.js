@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 import {GET_USERS, ADD_USER, DELETE_USER, USERS_LOADING} from './types';
 
 export const getUsers = () => dispatch => {
@@ -32,6 +33,19 @@ export const deleteUser = id => dispatch => {
             payload: id
         })
     );
+};
+
+// Login
+export const loginUser = user => dispatch => {
+  axios
+    .post("/api/users/sign-in", user)
+    .then(res => dispatch({
+        type: ADD_USER,
+        payload: res.data
+    }))
+    .then(() => {
+      history.push("/listings");
+    })
 };
 
 export const setUsersLoading = () => {
