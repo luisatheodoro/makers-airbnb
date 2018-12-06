@@ -7,6 +7,7 @@ import '../App.css';
 
 import { connect } from 'react-redux';
 import { addUser } from '../actions/userActions';
+import {Link} from 'react-router-dom'
 
 class UserRegistration extends Component {
     state = {
@@ -30,7 +31,7 @@ class UserRegistration extends Component {
             password: this.state.password
         };
         //Add name via addUser action
-        this.props.addUser(newUser);
+        this.props.addUser(newUser, this.props.history);
     };
 
     render() {
@@ -77,7 +78,7 @@ class UserRegistration extends Component {
                     </Col>
                     <Button color="dark" style={{marginTop: '2rem'}} block>Sign Up</Button>
                 </Form>
-                <p className="already-signed-up">Already signed up? <a href="/">Sign in</a></p>
+                <p className="already-signed-up">Already signed up? <Link to="/sign-in">Sign in</Link></p>
             </Container>
         );
     }

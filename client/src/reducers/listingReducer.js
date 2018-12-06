@@ -1,29 +1,29 @@
-import {GET_USERS, ADD_USER, DELETE_USER, USERS_LOADING} from '../actions/types';
+import {GET_LISTINGS, ADD_LISTING, DELETE_LISTING, LISTING_LOADING} from '../actions/types';
 
 const initialState = {
-    users: null,
+    listings: [],
     loading: false
 };
 
 module.exports = function (state = initialState, action) {
     switch(action.type) {
-        case GET_USERS:
+        case GET_LISTINGS:
             return {
                 ...state,
-                users: action.payload,
+                listings: action.payload,
                 loading:false
             };
-        case DELETE_USER:
+        case DELETE_LISTING:
             return {
                 ...state,
-                users: state.users.filter(user => user._id !== action.payload)
+                listings: state.listings.filter(listing => listing._id !== action.payload)
             };
-        case ADD_USER:
+        case ADD_LISTING:
             return {
                 ...state,
-                users: action.payload
+                listings: [action.payload, ...state.listings]
             };
-        case USERS_LOADING:
+        case LISTING_LOADING:
             return {
                 ...state,
                 loading: true
