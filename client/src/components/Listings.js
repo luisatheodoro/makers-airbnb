@@ -19,7 +19,7 @@ class Listings extends Component {
             <Container>
                 <ListGroup>
                     <TransitionGroup className="listings">
-                        {this.props.listings && this.props.listings.listings && this.props.listings.listings.map(({_id, title, description}) => (
+                        {this.props.listings && this.props.listings.listings && this.props.listings.listings.map(({_id, title, description, price}) => (
                             <CSSTransition key={_id} timeout={500} classNames="fade">
                                 <ListGroupItem>
                                     <Button className="remove-btn"
@@ -28,7 +28,7 @@ class Listings extends Component {
                                             onClick={this.onDeleteClick.bind(this, _id)}>
                                         &times;
                                     </Button>
-                                    {title} || {description}
+                                    {title} || {description} £ {price}
                                 </ListGroupItem>
 
                             </CSSTransition>

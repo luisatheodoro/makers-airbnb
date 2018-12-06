@@ -21,18 +21,9 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
     let newListing = new Listing({
-        name: req.body.name
-    });
-});
-
-// @route  POST api/listings
-// @desc   Create a listings
-// @access Public
-
-router.post('/', (req, res) => {
-    let newListing = new Listings({
         title: req.body.title,
-        description: req.body.description
+        description: req.body.description,
+        price: req.body.price
     });
 
     newListing.save().then(listing => res.json(listing));

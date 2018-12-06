@@ -10,14 +10,14 @@ import {
 } from 'reactstrap';
 
 import { connect } from 'react-redux';
-import { addUser } from '../actions/userActions';
+import { addListing } from '../actions/listingActions';
 
-class UserModal extends Component {
+class NewListingModal extends Component {
     state = {
         modal: false, //if the modal is open or not
-        name: '', //a form input needs to have a redux state inside component
-        email: '',
-        password: ''
+        title: '', //a form input needs to have a redux state inside component
+        description: '',
+        price:''
     };
 
     toggle = () => {
@@ -27,20 +27,20 @@ class UserModal extends Component {
     };
 
     onChange = (e) => {
-    this.setState({[e.target.name]: e.target.value});
-    this.setState({[e.target.email]: e.target.value});
-    this.setState({[e.target.password]: e.target.value});
+    this.setState({[e.target.title]: e.target.value});
+    this.setState({[e.target.description]: e.target.value});
+    this.setState({[e.target.price]: e.target.value});
     };
 
     onSubmit = e => {
       e.preventDefault();
-      const newUser = {
-        name: this.state.name,
-        email: this.state.email,
-        password: this.state.password
+      const newListing = {
+        title: this.state.title,
+        description: this.state.description,
+        price: this.state.price
       };
-      //Add name via addUser action
-        this.props.addUser(newUser);
+      //Add name via addListing action
+        this.props.addListing(newListing, this.props.history);
 
       //Close modal
         this.toggle();
@@ -51,41 +51,41 @@ class UserModal extends Component {
             <div>
                 <Button
                     color="dark"
-                    style={{marginBottom: '2rem'}}
+                    style={{marginBottom: '2rem', marginTop: '5rem', marginLeft: '1rem'}}
                     onClick={this.toggle}
                 >
-                    Add User
+                    Add a Listing
                 </Button>
                 <Modal
                     isOpen={this.state.modal}
                     toggle={this.toggle}
                 >
-                    <ModalHeader toggle={this.toggle}> Add user's list</ModalHeader>
+                    <ModalHeader toggle={this.toggle}> Add your listing</ModalHeader>
                     <ModalBody>
                         <Form onSubmit={this.onSubmit}>
                             <FormGroup>
-                                <Label for="user"> Name </Label>
+                                <Label for="title"> Title </Label>
                                 <Input
                                     type="text"
                                     name="name"
-                                    id="user"
-                                    placeholder="Name"
+                                    id="title"
+                                    placeholder="Title"
                                     onChange={this.onChange}
                                 />
-                                <Label for="email"> Email </Label>
+                                <Label for="description"> Description </Label>
                                 <Input
                                     type="text"
-                                    name="email"
-                                    id="user"
-                                    placeholder="Email"
+                                    name="name"
+                                    id="description"
+                                    placeholder="Description"
                                     onChange={this.onChange}
                                 />
-                                <Label for="password"> Password </Label>
+                                <Label for="price"> Price </Label>
                                 <Input
-                                    type="password"
-                                    name="password"
-                                    id="user"
-                                    placeholder="Password"
+                                    type="text"
+                                    name="name"
+                                    id="price"
+                                    placeholder="Price"
                                     onChange={this.onChange}
                                 />
                                 <Button
@@ -93,7 +93,7 @@ class UserModal extends Component {
                                     style={{marginTop: '2rem'}}
                                     block
                                 >
-                                    Add User
+                                    Add Listing
                                 </Button>
                             </FormGroup>
                         </Form>
@@ -104,8 +104,8 @@ class UserModal extends Component {
     }
 }
 const mapStateToProps = state => ({
-   user: state.user
+    listings: state.listings
 });
 
 
-module.exports = connect(mapStateToProps, {addUser})(UserModal);
+module.exports = connect(mapStateToProps, {addListing})(NewListingModal);

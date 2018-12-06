@@ -11,6 +11,10 @@ const ListingSchema = new Schema({
         type: String,
         require: true
     },
+    price: {
+        type: String,
+        require: true
+    },
 
 });
 

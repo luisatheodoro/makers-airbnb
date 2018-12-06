@@ -21,14 +21,14 @@ export const getListings = () => dispatch => {
         )
 };
 
-// export const addListings = (listings) => dispatch => {
-//     axios
-//         .post('/api/listings', listing)
-//         .then(res => dispatch({
-//             type: ADD_LISTING,
-//             payload: res.data
-//         }))
-// };
+export const addListing = (listing) => dispatch => {
+    axios
+        .post('/api/listings', listing)
+        .then(res => dispatch({
+            type: ADD_LISTING,
+            payload: res.data
+        }))
+};
 
 export const deleteListing = id => dispatch => {
     axios.delete(`/api/listings/${id}`).then(res =>

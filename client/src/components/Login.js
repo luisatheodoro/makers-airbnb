@@ -18,7 +18,6 @@ class Login extends Component {
 
     onChange = (e) => {
         this.setState({[e.target.email]: e.target.value});
-        this.setState({[e.target.password]: e.target.value});
     };
 
     onSubmit = e => {
