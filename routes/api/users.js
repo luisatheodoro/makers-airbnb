@@ -21,16 +21,39 @@ router.get('/', (req, res) => {
 // @access Public
 
 router.post('/', (req, res) => {
-    let newUser = new User({
+    var newUser = new User({
         name: req.body.name,
         email: req.body.email,
         password: req.body.password
     });
 
-    bcrypt.genSalt(10, function(err, salt) {
-        bcrypt.hash(newUser.password, salt, function(err, hash) {
-          newUser.password = hash;
-          newUser.save().then(user => res.json(user));
+    newUser.save(function(err) {
+        if (err) throw err;
+
+        // attempt to authenticate user
+        User.getAuthenticated(req.body.email, req.body.password, function(err, email, reason) {
+            if (err) throw err;
+
+            // login was successful if we have a user
+            if (email) {
+                // handle login success
+                console.log('login success');
+                return;
+            }
+
+            // otherwise we can determine why we failed
+            var reasons = User.failedLogin;
+            switch (reason) {
+                case reasons.NOT_FOUND:
+                case reasons.PASSWORD_INCORRECT:
+                    // note: these cases are usually treated the same - don't tell
+                    // the user *why* the login failed, only that it did
+                    break;
+                case reasons.MAX_ATTEMPTS:
+                    // send email or otherwise notify user that account is
+                    // temporarily locked
+                    break;
+            }
         });
     });
 
