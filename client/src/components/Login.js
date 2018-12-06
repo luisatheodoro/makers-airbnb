@@ -4,30 +4,37 @@ import {
     FormGroup, Label, Input, Button
 } from 'reactstrap';
 import '../App.css';
-
+import {addUser, getUsers} from '../actions/userActions';
 import { connect } from 'react-redux';
 import {Link} from 'react-router-dom'
 
 class Login extends Component {
+    state = {
+        email: '',
+        password: '',
+        error: '',
+        redirectToReferrer: false
+    };
 
+    onChange = (e) => {
+        this.setState({[e.target.email]: e.target.value});
+        this.setState({[e.target.password]: e.target.value});
+    };
+
+    onSubmit = e => {
+        e.preventDefault();
+        const user = {
+            email: this.state.email || undefined,
+            password: this.state.password || undefined
+        };
+        this.props.getUsers(user, this.props.history);
+    };
 
   render() {
     return (
       <Container className="App">
           <h2>Please enter your details below</h2>
           <Form onSubmit={this.onSubmit} className="form">
-              <Col>
-                  <FormGroup>
-                      <Label>Name</Label>
-                      <Input
-                          type="name"
-                          name="name"
-                          id="exampleName"
-                          placeholder="Name"
-                          onChange={this.onChange}
-                      />
-                  </FormGroup>
-              </Col>
               <Col>
                   <FormGroup>
                       <Label>Email</Label>
@@ -60,4 +67,9 @@ class Login extends Component {
   }
 }
 
-export default (Login);
+const mapStateToProps = state => ({
+    user: state.user
+});
+
+
+module.exports = connect(mapStateToProps, {getUsers})(Login);

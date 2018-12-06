@@ -2,7 +2,7 @@ import axios from 'axios';
 
 import {GET_USERS, ADD_USER, DELETE_USER, USERS_LOADING} from './types';
 
-export const getUsers = () => dispatch => {
+export const getUsers = (user, history) => dispatch => {
   dispatch(setUsersLoading());
   axios
       .get('/api/users')
@@ -10,8 +10,11 @@ export const getUsers = () => dispatch => {
           dispatch({
               type: GET_USERS,
               payload: res.data
-          })
-      )
+      }))
+      .then(() => {
+          history.push("/listings");
+
+      })
 };
 
 export const addUser = (user, history) => dispatch => {

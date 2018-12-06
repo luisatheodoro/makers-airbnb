@@ -52,9 +52,9 @@ router.delete('/:id', (req, res) => {
 // @desc Login user and return JWT token
 // @access Public
 router.post("/login", (req, res) => {
-  var name = req.body.name
-  var email = req.body.email
-  var password = req.body.password
+  var name = req.body.name;
+  var email = req.body.email;
+  var password = req.body.password;
 
   User.findOne({ name: name, email: email, password: password }, function(err, user) {
     if(err) {
