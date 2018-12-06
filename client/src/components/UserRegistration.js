@@ -78,7 +78,7 @@ class UserRegistration extends Component {
                     </Col>
                     <Button color="dark" style={{marginTop: '2rem'}} block>Sign Up</Button>
                 </Form>
-                <p className="already-signed-up">Already signed up? <Link to="/login">Sign in</Link></p>
+                <p className="already-signed-up">Already signed up? <Link to="/login">Login</Link></p>
             </Container>
         );
     }
