@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import {
-    Button,
+import { Button,
     Modal,
     ModalHeader,
     Form,
     FormGroup,
     Label,
-    Input, ModalBody
+    Input, ModalBody,
+    Col,
+    FormText
 } from 'reactstrap';
 
 import { connect } from 'react-redux';
@@ -15,21 +16,20 @@ import { addListing } from '../actions/listingActions';
 class NewListingModal extends Component {
     state = {
         modal: false, //if the modal is open or not
-        title: '', //a form input needs to have a redux state inside component
-        description: '',
-        price:''
+        title: '2 Bedroom Flat', //a form input needs to have a redux state inside component
+        description: 'Very well Kept',
+        price: 100,
     };
-
     toggle = () => {
         this.setState({
-            modal: !this.state.modal
+            modal: !this.state.modal,
         });
     };
 
     onChange = (e) => {
-    this.setState({[e.target.title]: e.target.value});
-    this.setState({[e.target.description]: e.target.value});
-    this.setState({[e.target.price]: e.target.value});
+        this.setState({[e.target.title]: e.target.value});
+        this.setState({[e.target.description]: e.target.value});
+        this.setState({[e.target.price]: e.target.value});
     };
 
     onSubmit = e => {
@@ -40,7 +40,7 @@ class NewListingModal extends Component {
         price: this.state.price
       };
       //Add name via addListing action
-        this.props.addListing(newListing, this.props.history);
+      this.props.addListing(newListing, this.props.history);
 
       //Close modal
         this.toggle();
@@ -62,40 +62,59 @@ class NewListingModal extends Component {
                 >
                     <ModalHeader toggle={this.toggle}> Add your listing</ModalHeader>
                     <ModalBody>
-                        <Form onSubmit={this.onSubmit}>
-                            <FormGroup>
-                                <Label for="title"> Title </Label>
-                                <Input
-                                    type="text"
-                                    name="name"
-                                    id="title"
-                                    placeholder="Title"
-                                    onChange={this.onChange}
-                                />
-                                <Label for="description"> Description </Label>
-                                <Input
-                                    type="text"
-                                    name="name"
-                                    id="description"
-                                    placeholder="Description"
-                                    onChange={this.onChange}
-                                />
-                                <Label for="price"> Price </Label>
-                                <Input
-                                    type="text"
-                                    name="name"
-                                    id="price"
-                                    placeholder="Price"
-                                    onChange={this.onChange}
-                                />
-                                <Button
-                                    color="dark"
-                                    style={{marginTop: '2rem'}}
-                                    block
-                                >
-                                    Add Listing
-                                </Button>
-                            </FormGroup>
+                        <Form onSubmit={this.onSubmit} className="formModal">
+                            <Col>
+                                <FormGroup>
+                                    <Label>Title</Label>
+                                    <Input
+                                        type="textarea"
+                                        name="title"
+                                        id="exampleTitle"
+                                        placeholder="Add a title"
+                                        onChange={this.onChange}
+                                    />
+                                </FormGroup>
+                            </Col>
+                            <Col>
+                                <FormGroup>
+                                    <Label>Description</Label>
+                                    <Input
+                                        type="textarea"
+                                        name="description"
+                                        id="exampleDescription"
+                                        placeholder="Describe your crib"
+                                        onChange={this.onChange}
+                                    />
+                                </FormGroup>
+                            </Col>
+                            <Col>
+                                <FormGroup>
+                                    <Label>Price</Label>
+                                    <Input
+                                        type="number"
+                                        name="price"
+                                        id="examplePrice"
+                                        placeholder="Name your price"
+                                        onChange={this.onChange}
+                                    />
+                                </FormGroup>
+                            </Col>
+                            <Col>
+                                <FormGroup>
+                                    <Label for="exampleFile">File</Label>
+                                    <Input type="file" name="file" id="exampleFile" />
+                                    <FormText color="muted">
+                                        Add your image
+                                    </FormText>
+                                </FormGroup>
+                            </Col>
+                            <Button
+                                color="dark"
+                                style={{marginTop: '2rem'}}
+                                block
+                            >
+                                Add Listing
+                            </Button>
                         </Form>
                     </ModalBody>
                 </Modal>
@@ -104,7 +123,7 @@ class NewListingModal extends Component {
     }
 }
 const mapStateToProps = state => ({
-    listings: state.listings
+    listings: state.listing
 });
 
 

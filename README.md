@@ -1,5 +1,20 @@
 # Makers-Airbnb
 
+## Installing dependencies
+
+To install dependencies in terminal type `npm install`
+then type `cd client` then `npm install` and then `cd ..`
+
+## Running server
+
+`npm run dev`
+
+## localhost addresses
+
+For user database table : http://localhost:5000/users
+For listings database table: http://localhost:5000/listings
+For website address: http://localhost:3000
+
 ## Headline specifications ##
 * Any signed-up user can list a new space.
 * Users can list multiple spaces.

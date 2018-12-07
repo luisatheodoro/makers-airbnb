@@ -20,7 +20,7 @@ router.get('/', (req, res) => {
 // @access Public
 
 router.post('/', (req, res) => {
-    let newListing = new Listing({
+    const newListing = new Listing({
         title: req.body.title,
         description: req.body.description,
         price: req.body.price

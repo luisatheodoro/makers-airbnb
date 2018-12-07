@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, ListGroup, ListGroupItem, Button } from 'reactstrap';
+import { Container, ListGroup, ListGroupItem, Button, Row, Col, Card, CardText, CardTitle, CardImg } from 'reactstrap';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { connect } from 'react-redux';  //to get state from the redux
 import { getListings, deleteListing } from '../actions/listingActions';
@@ -28,7 +28,15 @@ class Listings extends Component {
                                             onClick={this.onDeleteClick.bind(this, _id)}>
                                         &times;
                                     </Button>
-                                    {title} || {description} £ {price}
+                                    <div className="blocks">
+                                        <CardImg top width="100%" className="card-img-top" src="https://i.pinimg.com/564x/d4/bc/49/d4bc4921a9fcb60a74c03cf7d19724e3.jpg" alt="Card image" />
+                                        <Card body className="text-center">
+                                            <CardTitle>{title}</CardTitle>
+                                            <CardText>{description}</CardText>
+                                            <CardText>£{price}</CardText>
+                                            <Button>More Information</Button>
+                                        </Card>
+                                    </div>
                                 </ListGroupItem>
 
                             </CSSTransition>
