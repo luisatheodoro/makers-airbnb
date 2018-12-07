@@ -3,10 +3,23 @@ var chaiHttp = require('chai-http');
 var server = require('../server');
 var bcrypt = require('bcryptjs');
 var should = chai.should();
+var mongoose = require('mongoose');
 
 chai.use(chaiHttp);
 
-describe('Users', function() {
+describe('Initialize databse for testing', function() {
+
+  before(function (done) {
+      mongoose.connect("mongodb://admin:makers2018@ds113136.mlab.com:13136/makers_bnb", function(){
+          mongoose.connection.db.dropDatabase(function(){
+          done();
+        })
+      })
+    })
+  });
+
+describe('Database', function() {
+
   it('should list ALL users on /users GET', function(done) {
     chai.request(server)
       .get('/api/users')
@@ -26,7 +39,7 @@ describe('Users', function() {
       });
   });
 
-  it('should add a SINGLE User on /users POST', function(done) {
+  xit('should add a SINGLE User on /users POST', function(done) {
   chai.request(server)
     .post('/api/users')
     .send({'name': 'chris', 'email': 'chris@gmail.com', 'password' : 'mybadpassword'})
@@ -49,6 +62,7 @@ describe('Users', function() {
 });
 
 describe('Listings', function() {
+
   it('should list ALL listings on /users GET', function(done) {
     chai.request(server)
       .get('/api/listings')
@@ -73,11 +87,11 @@ describe('Listings', function() {
     .send({'title': 'my place', 'description': 'a very big place'})
     .end(function(err, res){
       res.should.be.json;
+      res.body.should.have.property('_id');
       res.body.should.have.property('my place');
       res.body.should.have.property('description');
       res.body.title.should.equal('my place');
       res.body.description.should.equal('a very big place');
-      console.log(res.body);
       done();
     });
   });
