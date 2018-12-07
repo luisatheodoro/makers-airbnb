@@ -19,8 +19,9 @@ describe('Users', function() {
   it('/users form submission POST', function(done) {
     chai.request(server)
       .post('/api/users')
+      .send({'name': 'chris', 'email': 'hello@gmail.com', 'password' : 'mybadpassword'})
       .end(function(err, res){
-        res.should.have.status(200);
+        res.should.be.json;
         done();
       });
   });
@@ -30,7 +31,6 @@ describe('Users', function() {
     .post('/api/users')
     .send({'name': 'chris', 'email': 'chris@gmail.com', 'password' : 'mybadpassword'})
     .end(function(err, res){
-      res.should.have.status(200);
       res.should.be.json;
       res.body.should.have.property('name');
       res.body.should.have.property('email');
@@ -58,26 +58,26 @@ describe('Listings', function() {
       });
   });
 
-  xit('/users form submission POST', function(done) {
+  it('/listings form submission POST', function(done) {
     chai.request(server)
       .post('/api/listings/')
       .end(function(err, res){
-        res.should.have.status(200);
+        res.should.be.json;
         done();
       });
   });
 
-  xit('should add a SINGLE User on /users POST', function(done) {
+  xit('should add a SINGLE listing on /listings POST', function(done) {
   chai.request(server)
     .post('/api/listings')
-    .send({'name': 'my place', 'description': 'a very big place'})
+    .send({'title': 'my place', 'description': 'a very big place'})
     .end(function(err, res){
-      res.should.have.status(200);
       res.should.be.json;
-      res.body.should.have.property('name');
+      res.body.should.have.property('my place');
       res.body.should.have.property('description');
-      res.body.name.should.equal('my place');
+      res.body.title.should.equal('my place');
       res.body.description.should.equal('a very big place');
+      console.log(res.body);
       done();
     });
   });
