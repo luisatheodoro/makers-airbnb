@@ -32,11 +32,12 @@ describe('Database', function() {
       .send({'name': 'chris', 'email': 'hello@gmail.com', 'password' : 'mybadpassword'})
       .end(function(err, res){
         res.should.be.json;
+        res.should.have.status(200);
         done();
       });
   });
 
-  xit('should add a SINGLE User on /users POST', function(done) {
+  it('should add a SINGLE User on /users POST', function(done) {
   chai.request(server)
     .post('/api/users')
     .send({'name': 'chris', 'email': 'chris@gmail.com', 'password' : 'mybadpassword'})
@@ -73,19 +74,20 @@ describe('Listings', function() {
     chai.request(server)
       .post('/api/listings/')
       .end(function(err, res){
+        res.should.have.status(200);
         res.should.be.json;
         done();
       });
   });
 
-  xit('should add a SINGLE listing on /listings POST', function(done) {
+  it('should add a SINGLE listing on /listings POST', function(done) {
   chai.request(server)
     .post('/api/listings')
     .send({'title': 'my place', 'description': 'a very big place'})
     .end(function(err, res){
       res.should.be.json;
       res.body.should.have.property('_id');
-      res.body.should.have.property('my place');
+      res.body.should.have.property('title');
       res.body.should.have.property('description');
       res.body.title.should.equal('my place');
       res.body.description.should.equal('a very big place');
