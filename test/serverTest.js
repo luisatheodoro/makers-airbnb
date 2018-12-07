@@ -7,18 +7,15 @@ var mongoose = require('mongoose');
 
 chai.use(chaiHttp);
 
-describe('Initialize databse for testing', function() {
+describe('Database', function() {
 
-  before(function (done) {
-      mongoose.connect("mongodb://admin:makers2018@ds113136.mlab.com:13136/makers_bnb", function(){
-          mongoose.connection.db.dropDatabase(function(){
-          done();
-        })
+  beforeEach(function (done) {
+    mongoose.connect("mongodb://admin:makers2018@ds113136.mlab.com:13136/makers_bnb", function(){
+        mongoose.connection.db.dropDatabase(function(){
+        done();
       })
     })
-  });
-
-describe('Database', function() {
+  })
 
   it('should list ALL users on /users GET', function(done) {
     chai.request(server)
