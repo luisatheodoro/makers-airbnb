@@ -15,7 +15,7 @@ describe('Database', function() {
         done();
       })
     })
-  })
+  });
 
   it('should list ALL users on /users GET', function(done) {
     chai.request(server)

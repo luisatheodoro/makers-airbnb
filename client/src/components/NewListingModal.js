@@ -16,9 +16,9 @@ import { addListing } from '../actions/listingActions';
 class NewListingModal extends Component {
     state = {
         modal: false, //if the modal is open or not
-        title: '2 Bedroom Flat', //a form input needs to have a redux state inside component
-        description: 'Very well Kept',
-        price: 100,
+        title: '', //a form input needs to have a redux state inside component
+        description: '',
+        price: 0,
     };
     toggle = () => {
         this.setState({
@@ -27,9 +27,7 @@ class NewListingModal extends Component {
     };
 
     onChange = (e) => {
-        this.setState({[e.target.title]: e.target.value});
-        this.setState({[e.target.description]: e.target.value});
-        this.setState({[e.target.price]: e.target.value});
+        this.setState({[e.target.name]: e.target.value});
     };
 
     onSubmit = e => {
@@ -71,6 +69,7 @@ class NewListingModal extends Component {
                                         name="title"
                                         id="exampleTitle"
                                         placeholder="Add a title"
+                                        value={this.state.title}
                                         onChange={this.onChange}
                                     />
                                 </FormGroup>
@@ -83,6 +82,7 @@ class NewListingModal extends Component {
                                         name="description"
                                         id="exampleDescription"
                                         placeholder="Describe your crib"
+                                        value={this.state.description}
                                         onChange={this.onChange}
                                     />
                                 </FormGroup>
@@ -95,6 +95,7 @@ class NewListingModal extends Component {
                                         name="price"
                                         id="examplePrice"
                                         placeholder="Name your price"
+                                        value={this.state.price}
                                         onChange={this.onChange}
                                     />
                                 </FormGroup>

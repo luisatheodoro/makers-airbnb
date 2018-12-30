@@ -19,8 +19,6 @@ class UserRegistration extends Component {
 
     onChange = (e) => {
         this.setState({[e.target.name]: e.target.value});
-        this.setState({[e.target.email]: e.target.value});
-        this.setState({[e.target.password]: e.target.value});
     };
 
     onSubmit = e => {
@@ -48,6 +46,7 @@ class UserRegistration extends Component {
                                 name="name"
                                 id="exampleName"
                                 placeholder="Name"
+                                value={this.state.name}
                                 onChange={this.onChange}
                             />
                         </FormGroup>
@@ -60,6 +59,7 @@ class UserRegistration extends Component {
                                 name="email"
                                 id="exampleEmail"
                                 placeholder="myemail@email.com"
+                                value={this.state.email}
                                 onChange={this.onChange}
                             />
                         </FormGroup>
@@ -72,6 +72,7 @@ class UserRegistration extends Component {
                                 name="password"
                                 id="examplePassword"
                                 placeholder="********"
+                                value={this.state.password}
                                 onChange={this.onChange}
                             />
                         </FormGroup>
